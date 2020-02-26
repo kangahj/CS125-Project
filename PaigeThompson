@@ -1,1 +1,16 @@
-hello
+#include <stdio.h>
+
+int personalCase()
+{
+    int chosenCase;
+    scanf("Please first choose a case: %d", &chosenCase);
+    printf("\n");
+}
+
+int main()
+{
+    printf("**************************DEAL OR NO DEAL******************************\n");
+    printf("In this game, you will be given 15 cases full of different monetary values.\n");
+    printf("They will range from as little as 5 cents all the way up to one million dollars.")
+    personalCase();
+}
