@@ -1,19 +1,23 @@
 #include <stdio.h>
 #include <string.h>
 
+#define ROWS 3
+#define COLS 5
+
 int personalCase()
 {
     int chosenCase;
     scanf("Please first choose the case you think holds 1 MILLION dollars: %d", &chosenCase);
     printf("\nThe case you have chosen is %d and this is YOUR case! This will stick with you through the game unless you take another offer.",chosenCase);
+    printf("\n");
     return chosenCase;
 }
 
-void print_array(int array[rows][cols])
+void print_array(int array[ROWS][COLS])
 {
     int x,y;
-    for(x=0; x<rows; x++){
-        for(y=0; y<cols; y++){
+    for(x=0; x<ROWS; x++){
+        for(y=0; y<COLS; y++){
             printf("%d   ", array[x][y]);
             }
         printf("\n");
@@ -22,7 +26,7 @@ void print_array(int array[rows][cols])
 
 int makeOffer()
 {
-    int offer;
+    int offer=0;
     
     return offer;
 }
@@ -37,18 +41,21 @@ char takeOffer()
 
 int main()
 {
-    do{
+    //do{
         printf("**************************DEAL OR NO DEAL******************************\n");
         printf("In this game, you will be given 15 cases full of different monetary values.\n");
-        printf("They will range from as little as one dollar all the way up to one million dollars.")
+        printf("They will range from as little as one dollar all the way up to one million dollars.");
         personalCase();
 
-        int cases[3][5] = {{1,2,3,4,5},{6,7,8,9,10},{11,12,13,14,15}};
-        int money[3][5] = {{,,,,},{,,,,},{,,,,}};
+        int cases[ROWS][COLS] = {{1,2,3,4,5},{6,7,8,9,10},{11,12,13,14,15}};
+        int money[ROWS][COLS] = {{1,100,500,1000,5000},{7500,10000,25000,50000,75000},{100000,250000,500000,750000,1000000}};
         
+        print_array("\nHERE ARE YOUR CASES\n");
         print_array(cases);
+        printf("\nHERE IS YOUR MONEY BOARD\n");
+        print_array(money);
         
-    }while(strcmp(takeOffer(),"yes") != 0);
+    //}while(strcmp(takeOffer(),"yes") != 0);
     
     return 0;
 }
