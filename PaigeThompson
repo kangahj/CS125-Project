@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 
+#define ROWS 3
+#define COLS 5
+
 int personalCase()
 {
     int chosenCase;
@@ -12,8 +15,8 @@ int personalCase()
 void print_array(int array[rows][cols])
 {
     int x,y;
-    for(x=0; x<rows; x++){
-        for(y=0; y<cols; y++){
+    for(x=0; x<ROWS; x++){
+        for(y=0; y<COLS; y++){
             printf("%d   ", array[x][y]);
             }
         printf("\n");
@@ -43,8 +46,8 @@ int main()
         printf("They will range from as little as one dollar all the way up to one million dollars.")
         personalCase();
 
-        int cases[3][5] = {{1,2,3,4,5},{6,7,8,9,10},{11,12,13,14,15}};
-        int money[3][5] = {{,,,,},{,,,,},{,,,,}};
+        int cases[ROWS][COLS] = {{1,2,3,4,5},{6,7,8,9,10},{11,12,13,14,15}};
+        int money[ROWS][COLS] = {{1,100,500,1000,5000},{7500,10000,25000,50000,75000},{100000,250000,500000,750000,1000000}};
         
         print_array(cases);
         
