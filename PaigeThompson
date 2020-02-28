@@ -31,6 +31,12 @@ void print_array(int array[ROWS][COLS])
     }   
 }
 
+int chooseCase()
+{
+    int case=0;
+    return case;
+}
+
 int makeOffer()
 {
     int offer=0;
