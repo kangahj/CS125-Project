@@ -9,7 +9,7 @@ int personalCase()
     int chosenCase;
     printf("\n\nPlease first choose the case you think holds 1 MILLION dollars: ");
     scanf("%d",&chosenCase);
-    while((chosenCase<1) || (chosenCase>15))
+    while(chosenCase<1 || chosenCase>15)
     {
         printf("Sorry, this is not a valid case. Please pick another: ");
         scanf("%d",&chosenCase);
@@ -36,16 +36,16 @@ int newArray(int array[16], int num)
     int newArray[16];
     int x;
     for(x=0; x<16; x++){
-         if(x!=num)
-         {
-            newArray[x] = array[x];
-         }
-         else
+         if(x==num)
          {
             newArray[x] = 0;
          }
+         else
+         {
+            newArray[x] = array[x];
+         }
     }   
-    return newArray;
+    return newArray[16];
 }
 
 int chooseCase()
@@ -75,7 +75,7 @@ int main()
     
     int cases[ROWS][COLS] = {{1,2,3,4,5},{6,7,8,9,10},{11,12,13,14,15}};
     int money[ROWS][COLS] = {{1,100,500,1000,5000},{7500,10000,25000,50000,75000},{100000,250000,500000,750000,1000000}};
-    int moneyInside[16] = {0,100,25000,1000,750000,1,50000,250000,1000000,500,5000,7500,500000,100000,10000);
+    int moneyInside[16] = {0,100,25000,1000,750000,1,50000,250000,1000000,500,5000,7500,75000,500000,100000,10000};
     
     printf("\n\n**************************DEAL OR NO DEAL******************************\n\n");
     printf("In this game, you will be given 15 cases full of different monetary values.\n");
@@ -87,12 +87,23 @@ int main()
     print_array(money);
     printf("\n");
     
-    startingMoney = moneyInside[personalCase()];
+
+    int personalCasenum = personalCase();
+
     
-    newArray(moneyInside,personalCase());
+    startingMoney = moneyInside[personalCasenum];
+    
+    moneyInside[16] = newArray(moneyInside,personalCasenum);
     
     printf("\nNow it's time to start playing the game.\n\n");
-    
+   
+    printf("\n %d this is the case value.\n", startingMoney);
+    moneyInside[personalCasenum] = 0;
+
+    int loop;
+
+    for(loop = 0; loop < 16; loop++)
+      printf("%d ", moneyInside[loop]);
     //do{
     
     //}while(strcmp(takeOffer(),"yes") != 0);
