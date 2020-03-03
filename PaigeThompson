@@ -31,6 +31,23 @@ void print_array(int array[ROWS][COLS])
     }   
 }
 
+int newArray(int array[16], int num)
+{
+    int newArray[16];
+    int x;
+    for(x=0; x<16; x++){
+         if(x!=num)
+         {
+            newArray[x] = array[x];
+         }
+         else
+         {
+            newArray[x] = 0;
+         }
+    }   
+    return newArray;
+}
+
 int chooseCase()
 {
     int moneyInside=0;
@@ -54,8 +71,12 @@ char takeOffer()
 
 int main()
 {
+    int startingMoney;
+    
     int cases[ROWS][COLS] = {{1,2,3,4,5},{6,7,8,9,10},{11,12,13,14,15}};
     int money[ROWS][COLS] = {{1,100,500,1000,5000},{7500,10000,25000,50000,75000},{100000,250000,500000,750000,1000000}};
+    int moneyInside[16] = {0,100,25000,1000,750000,1,50000,250000,1000000,500,5000,7500,500000,100000,10000);
+    
     printf("\n\n**************************DEAL OR NO DEAL******************************\n\n");
     printf("In this game, you will be given 15 cases full of different monetary values.\n");
     printf("They will range from as little as one dollar all the way up to one million dollars.");
@@ -66,7 +87,9 @@ int main()
     print_array(money);
     printf("\n");
     
-    personalCase();
+    startingMoney = moneyInside[personalCase()];
+    
+    newArray(moneyInside,personalCase());
     
     printf("\nNow it's time to start playing the game.\n\n");
     
