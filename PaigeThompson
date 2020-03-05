@@ -4,6 +4,8 @@
 #define ROWS 3
 #define COLS 5
 
+// user chooses first case that they think has a million dollars
+//stays with them through the whole game 
 int personalCase()
 {
     int chosenCase;
@@ -20,6 +22,7 @@ int personalCase()
     return chosenCase;
 }
 
+//printing the arrays 
 void print_array(int array[ROWS][COLS])
 {
     int x,y;
@@ -30,7 +33,7 @@ void print_array(int array[ROWS][COLS])
         printf("\n");
     }   
 }
-
+//replaces number with 0 
 int newArray(int array[16], int num)
 {
     int newArray[16];
@@ -48,27 +51,28 @@ int newArray(int array[16], int num)
     return newArray[16];
 }
 
+//Actually game 
 int chooseCase()
 {
-    int case=0;
+    int casesmall=0;
     printf("\nChoose a case that you think has a small value: ");
-    scanf("%d",&case);
-    while(case<1 || case>15)
+    scanf("%d",&casesmall);
+    while(casesmall<1 || casesmall>15)
     {
         printf("Sorry, this is not a valid case. Please pick another: ");
-        scanf("%d",&case);
+        scanf("%d",&casesmall);
         printf("\n");
     }
-    return case;
+    return casesmall;
 }
-
+//banker takes all the values left over and makes an offer they can if they want to end the game 
 int makeOffer()
 {
     int offer=0;
     
     return offer;
 }
-
+//take offer
 char takeOffer()
 {
     char answer;
@@ -104,8 +108,14 @@ int main()
     
     printf("\nNow it's time to start playing the game.\n\n");
    
-    printf("\n %d this is the case value.\n", startingMoney);
     moneyInside[personalCasenum] = 0;
+
+    printf("Now your going to choose 5 cases. The goal is to choose cases with small monetary values.\n");
+    int firstcase= chooseCase();
+    int firstcasemoney= moneyInside[firstcase];
+    printf("The money inside is: %d\n", moneyInside[firstcase]);
+    moneyInside[firstcase]= 0; 
+    
     
     //do{
     
@@ -113,3 +123,4 @@ int main()
     
     return 0;
 }
+
