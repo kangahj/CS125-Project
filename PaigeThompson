@@ -17,7 +17,7 @@ int personalCase()
         scanf("%d",&chosenCase);
         printf("\n");
     }
-    printf("\nThe case you have chosen is %d and this is YOUR case! This will stick with you through the game unless you take another offer.",chosenCase);
+    printf("The case you have chosen is %d and this is YOUR case! This will stick with you through the game unless you take another offer.",chosenCase);
     printf("\n");
     return chosenCase;
 }
@@ -75,12 +75,19 @@ int main()
     int cases[ROWS][COLS] = {{1,2,3,4,5},{6,7,8,9,10},{11,12,13,14,15}};
     int money[ROWS][COLS] = {{1,100,500,1000,5000},{7500,10000,25000,50000,75000},{100000,250000,500000,750000,1000000}};
     int moneyInside[16] = {0,100,25000,1000,750000,1,50000,250000,1000000,500,5000,7500,75000,500000,100000,10000};
-    
-    //File *f1 = fopen("welcome.txt","r");
-    //fscanf(f1, "%d", &x);
-    
-    printf("\n*************************** DEAL OR NO DEAL **************************************\n\n");
-    printf("In this game, you will be given 15 cases full of different monetary values.\n");
+    char buff[2500];
+
+    printf("\n\n\n");
+    FILE* f1 = fopen("welcome.txt","r");
+    fgets(buff, 2500, f1);
+    int e;
+    for(e=0;e<7;e++)
+    {
+        printf("%s", buff);
+        fgets(buff,2500,f1);
+    }
+
+    printf("\n\nIn this game, you will be given 15 cases full of different monetary values.\n");
     printf("They will range from as little as one dollar all the way up to one million dollars.\n");
     printf("The goal of this game is to eliminate the smaller value cases, so that you have a bigger monetary average!\n\n");
     
@@ -270,7 +277,7 @@ int main()
     //The User has decided to take the money that's in their personal case. Here's the big reveal!
     printf("Player............... since you have denied all other offers, it means you are walking away with whatever is in your own briefcase.\n");
     printf("\n\nIT'S TIME TO REVEAL HOW MUCH MONEY YOU ARE WALKING AWAY WITH.\n\n");
-    printf("PLAYER................... OPEN YOUR CASE!!!!!!!!!!!!");
+    printf("PLAYER................... OPEN YOUR CASE!!!!!!!!!!!!\n");
     printf(".........................................................\n");
     printf(".........................................................\n");
     printf(".........................................................\n");
