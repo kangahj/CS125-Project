@@ -5,6 +5,7 @@
 #define ROWS 3
 #define COLS 5
 
+
 //The user chooses the first case that they think has a million dollars
 //This stays with them through the whole game
 int personalCase()
@@ -61,12 +62,11 @@ int chooseCase()
     int casesmall=0;
     printf("\nChoose a case that you think has a small monetary value (1-15, not including the ones you have already chosen): ");
     scanf("%d",&casesmall);
-    while(casesmall<1 || casesmall>15 && casesmall!=0 || casesesmall != 16)
+    while(casesmall<1 || casesmall>15)
     {
         printf("Sorry, this is not a valid case. Please pick another: ");
         scanf("%d",&casesmall);
         printf("\n");
-        break;
     }
     return casesmall;
 }
@@ -78,9 +78,9 @@ int main()
     int cases[ROWS][COLS] = {{1,2,3,4,5},{6,7,8,9,10},{11,12,13,14,15}};
     int money[ROWS][COLS] = {{1,100,500,1000,5000},{7500,10000,25000,50000,75000},{100000,250000,500000,750000,1000000}};
     int moneyInside[16] = {0,100,25000,1000,750000,1,50000,250000,1000000,500,5000,7500,75000,500000,100000,10000};
-    //char buff[2500];
+    char buff[2500];
 
-    /*printf("\n\n\n");
+    printf("\n\n\n");
     FILE* f1 = fopen("welcome.txt","r");
     fgets(buff, 2500, f1);
     int e;
@@ -88,7 +88,7 @@ int main()
     {
         printf("%s", buff);
         fgets(buff,2500,f1);
-    }*/
+    }
 
     printf("\n\nIn this game, you will be given 15 cases full of different monetary values.\n");
     printf("They will range from as little as one dollar all the way up to one million dollars.\n");
@@ -198,7 +198,7 @@ int main()
 
     if(strcmp(pointers,"take")==0)
     {
-        printf("\n\nCONGRATULATIONS!!! YOU JUST WALKED AWAY WITH %d DOLLARS AT THE END OF THIS ROUND!!!!!!!!!!!!\n\n", offer2);
+        printf("\n\nCONGRATULATIONS!!! YOU JUST WALKED AWAY WITH $%d DOLLARS!!!!!!!!!!!!\n\n", offer2);
         printf("Continue the game to see how much money you could have won, or quit by pressing control Z\n");
 
     }
@@ -247,7 +247,7 @@ int main()
 
     if(strcmp(pointers,"take")==0)
     {
-        printf("CONGRATULATIONS!!!! YOU JUST WALKED AWAY WITH $%d DOLLARS AT THE END OF THIS ROUND!!!!!!!!!!!!!!!!!!\n",offer3);
+        printf("CONGRATULATIONS!!!! YOU JUST WALKED AWAY WITH $%d DOLLARS!!!!!!!!!!!!!!!!!!\n",offer3);
         printf("Stick around to see what you would have won, had you kept playing, or quit by pressing Control z\n");
     }
 
@@ -302,14 +302,14 @@ int main()
     printf("\n\n$%d DOLLARS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",startingMoney);
     }
 
-
+    //Prints to a file the total of how much money the player was offered
     printf("\n\nCONGRATULATIONS. THANK YOU FOR PLAYING!!!\n");
     int offer5;
     offer5=offer1+offer2+offer3+offer4;
     FILE* fp;
-    char buff[100]="From All 4 rounds you earned a total of: ";
-    fp=fopen("welcome.txt", "w");
-    fprintf(fp, "%s", buff);
+    char newfile[100]="From All 4 rounds you were offered a total of: ";
+    fp=fopen("winnings.txt", "w");
+    fprintf(fp, "%s", newfile);
     fprintf(fp, "%d\n", offer5);
 
     fclose(fp);
