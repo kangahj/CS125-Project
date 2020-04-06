@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #define ROWS 3
 #define COLS 5
 
+
 //The user chooses the first case that they think has a million dollars
-//This stays with them through the whole game 
+//This stays with them through the whole game
 int personalCase()
 {
     int chosenCase;
@@ -16,13 +18,14 @@ int personalCase()
         printf("Sorry, this is not a valid case. Please pick another: ");
         scanf("%d",&chosenCase);
         printf("\n");
+        break;
     }
     printf("The case you have chosen is %d and this is YOUR case! This will stick with you through the game unless you take another offer.",chosenCase);
     printf("\n");
     return chosenCase;
 }
 
-//printing the arrays 
+//printing the arrays
 void print_array(int array[ROWS][COLS])
 {
     int x,y;
@@ -32,10 +35,10 @@ void print_array(int array[ROWS][COLS])
             printf("%9d", array[x][y]);
             }
         printf("\n");
-    }   
+    }
 }
 
-//replaces number with 0 
+//replaces number with 0
 int newArray(int array[16], int num)
 {
     int newArray[16];
@@ -49,7 +52,7 @@ int newArray(int array[16], int num)
          {
             newArray[x] = array[x];
          }
-    }   
+    }
     return newArray[16];
 }
 
@@ -71,7 +74,7 @@ int chooseCase()
 int main()
 {
     int startingMoney;
-    
+
     int cases[ROWS][COLS] = {{1,2,3,4,5},{6,7,8,9,10},{11,12,13,14,15}};
     int money[ROWS][COLS] = {{1,100,500,1000,5000},{7500,10000,25000,50000,75000},{100000,250000,500000,750000,1000000}};
     int moneyInside[16] = {0,100,25000,1000,750000,1,50000,250000,1000000,500,5000,7500,75000,500000,100000,10000};
@@ -90,10 +93,11 @@ int main()
     printf("\n\nIn this game, you will be given 15 cases full of different monetary values.\n");
     printf("They will range from as little as one dollar all the way up to one million dollars.\n");
     printf("The goal of this game is to eliminate the smaller value cases, so that you have a bigger monetary average!\n\n");
-    
-    printf("\nHERE ARE YOUR CASES\n");
+
+    printf("\nHERE ARE YOUR CASES:\n");
     print_array(cases);
-    printf("\nHERE IS YOUR MONEY BOARD\n");
+    printf("\n");
+    printf("\nHERE IS YOUR MONEY BOARD:\n");
     print_array(money);
     printf("\n");
 
@@ -101,14 +105,15 @@ int main()
     int personalCaseNum = personalCase();
     startingMoney = moneyInside[personalCaseNum];
     moneyInside[16] = newArray(moneyInside,personalCaseNum);
-    
+
     printf("\nNOW IT'S TIME TO START PLAYING THE GAME.\n\n");
-   
+    printf("\n");
+
     moneyInside[personalCaseNum] = 0;
 
     //They start out by choosing 5 cases.
     printf("You are going to choose 5 cases. The goal is to choose cases with small monetary values.\n");
-    
+
     int z,n, firstCase=0, firstCaseMoney, casesChosenAlready[16];
     casesChosenAlready[0]=personalCaseNum;
     for(z=0;z<5;z++){
@@ -121,24 +126,24 @@ int main()
         firstCaseMoney= moneyInside[firstCase];
         casesChosenAlready[z+1]=firstCase;
         printf("THE MONEY INSIDE IS.........: $%d\n", moneyInside[firstCase]);
-        moneyInside[firstCase]= 0; 
+        moneyInside[firstCase]= 0;
     }
 
     //This is where the banker computes the offer he is going to make.
-    int r,offer=0;
+    int r,offer1=0;
     for(r=0;r<16;r++)
     {
-        offer = offer + moneyInside[r];   
+        offer1 = offer1 + moneyInside[r];
     }
-    offer/=100;
+    offer1/=100;
 
     // After the contestant chooses their first five cases, the banker is called for an offer.
-    
+
     printf("\nTIME TO CALL THE BANKER. HE WILL MAKE YOU AN OFFER BASED ON THE MONEY STILL LEFT ON YOUR BOARD.\n");
     printf("RIIIIIING RIIIIIING... Hello? Okay. Okay.\n\n");
 
-    printf("The offer the banker is going to make to you is.............. $%d\n", offer);
-    
+    printf("The offer the banker is going to make to you is.............. $%d\n", offer1);
+
     //Asks the user if he/she wants to take the offer
     char *pointers,answer[5];
     pointers=answer;
@@ -147,12 +152,15 @@ int main()
 
     if(strcmp(pointers,"take")==0)
     {
-        printf("\n\nCONGRATULATIONS!! YOU JUST WALKED AWAY WITH %d DOLLARS!!!\n",offer);
+        printf("\n\nCONGRATULATIONS!! YOU JUST WALKED AWAY WITH %d DOLLARS!!!\n",offer1);
+        printf("This is the end of Round 1!\n");
         printf("Continue the game to see how much you could have won, or Quit to leave the game (control Z)\n\n");
     }
-    
+
     //On to the next set of 4 cases
 
+    printf("Round 2!\n");
+    printf("\n");
     printf("\nNow, you are going to choose four more cases that you think hold small monetary values.\n");
 
     int y,h;
@@ -172,17 +180,17 @@ int main()
     }
 
     //The banker computes the offer to be made
-    offer = 0;
+    int offer2 = 0;
     for(r=0;r<16;r++)
     {
-        offer = offer + moneyInside[r];
+        offer2 = offer2 + moneyInside[r];
     }
-    offer/=10;
-    
+    offer2/=10;
+
     printf("\nTIME TO CALL THE BANKER. HE WILL MAKE YOU AN OFFER BASED ON THE MONEY LEFT IN YOUR CASES\n");
     printf("RIIIIIIIIIING RIIIIIIIIING.... Hello? Yup. Okay. I get you. \n\n");
 
-    printf("The offer the banker is going to make you is........................ $%d\n",offer);
+    printf("The offer the banker is going to make you is........................ $%d\n",offer2);
 
     //The user is asked if he/she would like to take the offer
     printf("Do you want to take the offer? (take/deny): ");
@@ -190,11 +198,15 @@ int main()
 
     if(strcmp(pointers,"take")==0)
     {
-        printf("\n\nCONGRATULATIONS!!! YOU JUST WALKED AWAY WITH %d DOLLARS !!!!!!!!!!!!\n\n", offer);
+        printf("\n\nCONGRATULATIONS!!! YOU JUST WALKED AWAY WITH $%d DOLLARS!!!!!!!!!!!!\n\n", offer2);
         printf("Continue the game to see how much money you could have won, or quit by pressing control Z\n");
+
     }
 
     //Now, the user chooses two more cases.
+
+    printf("ROUND 3!! GO!!");
+    printf("\n");
     y=0;
     h=0;
     z=0;
@@ -215,31 +227,33 @@ int main()
         printf("THE MONEY INSIDE IS................... $%d\n",moneyInside[firstCase]);
         moneyInside[firstCase]=0;
     }
-    
+
     //The Banker computes his offer
-    offer = 0;
+    int offer3 = 0;
     r = 0;
     for(r=0;r<16;r++)
     {
-        offer = offer + moneyInside[r];
+        offer3 = offer3 + moneyInside[r];
     }
-    offer /= 3;
+    offer3 /= 3;
 
     printf("\nTIME TO CALL THE BANKER!! HE WILL MAKE YOU AN OFFER BASED ON THE MONEY YOU HAVE LEFT IN YOUR CASES.\n");
     printf("RIIIIIIIIIIIING RIIIIIIIIIIIING RIIIIIIIIIIIING... Yes sir. I understand sir. Okay, I'll tell the player.\n\n");
 
     //The User is asked if they'd like to take the offer.
-    printf("The offer the banker is going to make you is............. $%d\n",offer);
+    printf("The offer the banker is going to make you is............. $%d\n",offer3);
     printf("\nNow, this is a big decision. You only have 3 cases left. Do you want to take the offer? (take / deny): \n");
     scanf("%s",pointers);
 
     if(strcmp(pointers,"take")==0)
     {
-        printf("CONGRATULATIONS!!!! YOU JUST WALKED AWAY WITH $%d DOLLARS!!!!!!!!!!!!!!!!!!\n",offer);
+        printf("CONGRATULATIONS!!!! YOU JUST WALKED AWAY WITH $%d DOLLARS!!!!!!!!!!!!!!!!!!\n",offer3);
         printf("Stick around to see what you would have won, had you kept playing, or quit by pressing Control z\n");
     }
 
     //This is the final round of asking for a case.
+    printf("FINAL ROUND!!!");
+    printf("\n");
     printf("\nHere are the cases that you have chosen already: \n");
     for(z=0;z<12;z++)
     {
@@ -250,31 +264,30 @@ int main()
     casesChosenAlready[12]=firstCase;
     printf("THE MONEY INSIDE IS................... $%d\n",moneyInside[firstCase]);
     moneyInside[firstCase]=0;
-    
+
     //The Banker computes his offer
-    offer = 0;
+    int offer4 = 0;
     r = 0;
     for(r=0;r<16;r++)
     {
-        offer = offer + moneyInside[r];
+        offer4 = offer4 + moneyInside[r];
     }
-    offer /= 2;
+    offer4 /= 2;
 
     printf("\nTIME TO CALL THE BANKER!! HE WILL MAKE YOU AN OFFER BASED ON THE MONEY YOU HAVE LEFT IN YOUR CASES.\n");
     printf("RIIIIIIIIIIIING RIIIIIIIIIIIING RIIIIIIIIIIIING... Yes sir. I understand sir. Okay, I'll tell the player.\n\n");
 
     //The User is asked if they'd like to take the offer.
-    printf("The offer the banker is going to make you is............. $%d\n",offer);
+    printf("The offer the banker is going to make you is............. $%d\n",offer4);
     printf("\nIf you don't take this offer, you will have to take the money that's in your personal case. Do you want to take the offer? (take / deny): ");
     scanf("%s",pointers);
 
     if(strcmp(pointers,"take")==0)
     {
-        printf("CONGRATULATIONS!!!! YOU JUST WALKED AWAY WITH $%d DOLLARS!!!!!!!!!!!!!!!!!!\n",offer);
-        printf("Stick around to see what you would have won, had you kept playing, or quit by pressing Control z\n");
-    }
-
-    //The User has decided to take the money that's in their personal case. Here's the big reveal!
+        printf("CONGRATULATIONS!!!! YOU JUST WALKED AWAY WITH $%d DOLLARS!!!!!!!!!!!!!!!!!!\n",offer4);
+        }
+    else if(strcmp(pointers, "deny")==0){
+   //The User has decided to take the money that's in their personal case. Here's the big reveal!
     printf("Player............... since you have denied all other offers, it means you are walking away with whatever is in your own briefcase.\n");
     printf("\n\nIT'S TIME TO REVEAL HOW MUCH MONEY YOU ARE WALKING AWAY WITH.\n\n");
     printf("PLAYER................... OPEN YOUR CASE!!!!!!!!!!!!\n");
@@ -287,8 +300,22 @@ int main()
     printf(".........................................................\n");
     printf(".........................................................\n");
     printf("\n\n$%d DOLLARS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",startingMoney);
+    }
 
+    //Prints to a file the total of how much money the player was offered
     printf("\n\nCONGRATULATIONS. THANK YOU FOR PLAYING!!!\n");
-   
+    int offer5;
+    offer5=offer1+offer2+offer3+offer4;
+    FILE* fp;
+    char newfile[100]="From All 4 rounds you were offered a total of: ";
+    fp=fopen("winnings.txt", "w");
+    fprintf(fp, "%s", newfile);
+    fprintf(fp, "%d\n", offer5);
+
+    fclose(fp);
+
+
+
+
     return firstCaseMoney;
 }
