@@ -74,11 +74,13 @@ int main()
 {
     int startingMoney;
 
+    //arrays for the cases, the money options, and the money actually inside
     int cases[ROWS][COLS] = {{1,2,3,4,5},{6,7,8,9,10},{11,12,13,14,15}};
     int money[ROWS][COLS] = {{1,100,500,1000,5000},{7500,10000,25000,50000,75000},{100000,250000,500000,750000,1000000}};
     int moneyInside[16] = {0,100,25000,1000,750000,1,50000,250000,1000000,500,5000,7500,75000,500000,100000,10000};
     char buff[2500];
 
+    //prints a deal or no deal sign to the screen using file i/o
     printf("\n\n\n");
     FILE* f1 = fopen("welcome.txt","r");
     fgets(buff, 2500, f1);
